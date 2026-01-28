@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FinShield AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🛡️ FinShield AI</h1>
+        <p>Paste a message to check if it’s a scam.</p>
+
+        <form method="POST">
+            <textarea name="message" placeholder="Paste SMS, WhatsApp, or email here..." required></textarea>
+            <button type="submit">Analyze</button>
+        </form>
+
+        {% if result %}
+            <div class="result">
+                <h2>{{ result.risk }}</h2>
+                <p><strong>Scam Score:</strong> {{ result.score }}%</p>
+
+                <ul>
+                    {% for reason in result.reasons %}
+                        <li>{{ reason }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
