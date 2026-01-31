@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Welcome {{ user }}</h2>
+<p>Account type: {{ type }}</p>
+
+<ul>
+    <li><a href="/check">Check Scam</a></li>
+    <li><a href="/alerts">View Alerts</a></li>
+    <li><a href="/logout">Logout</a></li>
+</ul>
+{% endblock %}

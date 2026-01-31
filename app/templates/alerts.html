@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Scam Alerts</h2>
+<ul>
+{% for item in data %}
+    <li><strong>{{ item[1] }}</strong> — {{ item[0] }}</li>
+{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Check Scam Risk</h2>
+<form method="POST">
+    <textarea name="text" rows="5" required></textarea><br>
+    <button type="submit">Analyze</button>
+</form>
+
+{% if result %}
+<h3>Result: {{ result }}</h3>
+{% endif %}
+{% endblock %}

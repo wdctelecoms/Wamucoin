@@ -1,31 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>FinShield AI</title>
-    <link rel="stylesheet" href="/static/style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>🛡️ FinShield AI</h1>
-        <p>Paste a message to check if it’s a scam.</p>
-
-        <form method="POST">
-            <textarea name="message" placeholder="Paste SMS, WhatsApp, or email here..." required></textarea>
-            <button type="submit">Analyze</button>
-        </form>
-
-        {% if result %}
-            <div class="result">
-                <h2>{{ result.risk }}</h2>
-                <p><strong>Scam Score:</strong> {{ result.score }}%</p>
-
-                <ul>
-                    {% for reason in result.reasons %}
-                        <li>{{ reason }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+{% extends "base.html" %}
+{% block content %}
+<div class="hero-section">
+    <h2>Welcome to FinShield AI</h2>
+    <p class="tagline">Your Intelligent Financial Security Partner</p>
+    <p class="description">Protect yourself from fake investments, crypto scams, and financial fraud with our advanced AI-powered detection system.</p>
+    
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon">🛡️</div>
+            <h3>Real-Time Detection</h3>
+            <p>Instantly identify suspicious transactions and investment schemes using advanced AI analysis.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Smart Analysis</h3>
+            <p>Comprehensive evaluation of financial texts to detect patterns and indicators of fraud.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🔔</div>
+            <h3>Active Alerts</h3>
+            <p>Stay informed with real-time notifications about emerging scams and threats.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">📢</div>
+            <h3>Community Reporting</h3>
+            <p>Report suspicious activities and help protect the community from financial threats.</p>
+        </div>
     </div>
-</body>
-</html>
+    
+    <div class="cta-section">
+        <a href="/check" class="cta-button primary">Check Text for Scams</a>
+        <a href="/alerts" class="cta-button secondary">View Active Alerts</a>
+    </div>
+    
+    <div class="info-box">
+        <h4>How It Works</h4>
+        <ol>
+            <li><strong>Enter Text:</strong> Paste the suspicious message, email, or investment proposal</li>
+            <li><strong>AI Analysis:</strong> Our system analyzes the content for scam indicators</li>
+            <li><strong>Get Results:</strong> Receive an instant risk assessment and detailed analysis</li>
+            <li><strong>Take Action:</strong> Report suspicious activities to help others</li>
+        </ol>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FinShield AI</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-logo">
+            <a href="/">FinShield AI</a>
+        </div>
+        <div class="navbar-menu">
+            <a href="/intro" class="nav-item">About</a>
+            {% if session.get('user') %}
+                <a href="/dashboard" class="nav-item">Dashboard</a>
+                <a href="/check" class="nav-item">Check Scam</a>
+                <a href="/report" class="nav-item">Report</a>
+                <a href="/alerts" class="nav-item">Alerts</a>
+                <a href="/logout" class="nav-item nav-logout">Logout</a>
+            {% else %}
+                <a href="/login" class="nav-item nav-btn-secondary">Sign In</a>
+                <a href="/register" class="nav-item nav-btn-primary">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+{% block content %}{% endblock %}
+</body>
+</html>
+</body>
+</html>
+
