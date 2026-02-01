@@ -17,7 +17,19 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = "finshield_secret_key"
-DB = "database.db"
+# Database path: prefer explicit `DATABASE_PATH` env var, else use a writable
+# runtime location. Vercel's filesystem is ephemeral but `/tmp` is writable
+# during runtime which prevents "unable to open database file" errors.
+DB = os.environ.get("DATABASE_PATH", os.path.join("/tmp", "database.db"))
+
+# Ensure DB directory exists (no-op for /tmp but safe for custom paths)
+try:
+    db_dir = os.path.dirname(DB)
+    if db_dir and not os.path.exists(db_dir):
+        os.makedirs(db_dir, exist_ok=True)
+except Exception:
+    # If directory creation fails, fall back to in-memory DB to avoid crashes
+    DB = ":memory:"
 
 # Email / SMTP configuration
 SMTP_SERVER = os.environ.get("SMTP_SERVER", "smtp.gmail.com")
