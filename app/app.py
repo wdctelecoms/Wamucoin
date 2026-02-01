@@ -92,6 +92,16 @@ def init_db():
     conn.commit()
     conn.close()
 
+# Ensure DB is initialized when the app is imported or on first request
+try:
+    init_db()
+except Exception:
+    # Defer initialization to the first request if immediate init fails
+    pass
+
+# Also ensure initialization runs before the first request in WSGI environments
+app.before_first_request(init_db)
+
 # Advanced AI Fraud Detection System
 class FraudDetectionAI:
     def __init__(self):
