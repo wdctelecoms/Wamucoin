@@ -14,7 +14,7 @@
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         width: 100%;
-        max-width: 400px;
+        max-width: 450px;
         text-align: center;
     }
     
@@ -52,7 +52,7 @@
         box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
     }
     
-    .login-btn {
+    .action-btn {
         width: 100%;
         padding: 12px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -65,7 +65,7 @@
         transition: all 0.3s;
     }
     
-    .login-btn:hover {
+    .action-btn:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
     }
@@ -80,7 +80,6 @@
         color: #667eea;
         text-decoration: none;
         font-weight: bold;
-        margin: 0 10px;
         transition: color 0.3s;
     }
     
@@ -98,16 +97,25 @@
         font-weight: bold;
     }
     
-    .divider {
-        margin: 20px 0;
-        text-align: center;
-        color: #999;
+    .info-box {
+        background: #e7f3ff;
+        border-left: 4px solid #2196F3;
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        text-align: left;
+        color: #333;
     }
 </style>
 
 <div class="auth-container">
     <div class="auth-card">
-        <h2>🔐 Login</h2>
+        <h2>📧 Resend Verification Email</h2>
+        
+        <div class="info-box">
+            <strong>Need to verify your email?</strong><br>
+            Enter the email address associated with your account and we'll send you a new verification link.
+        </div>
         
         {% if error %}
         <div class="error-message">{{ error }}</div>
@@ -115,23 +123,16 @@
         
         <form method="POST">
             <div class="form-group">
-                <label for="login">Email or Username</label>
-                <input type="text" id="login" name="login" placeholder="Enter your email or username" required>
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email address" required>
             </div>
             
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
-            </div>
-            
-            <button type="submit" class="login-btn">Login</button>
+            <button type="submit" class="action-btn">Send Verification Email</button>
         </form>
         
-        <div class="divider">or</div>
-        
         <div class="auth-links">
-            <a href="/register">Create Account</a> | 
-            <a href="/resend_verification">Verify Email</a>
+            <a href="/login">Back to Login</a> | 
+            <a href="/register">Create Account</a>
         </div>
     </div>
 </div>

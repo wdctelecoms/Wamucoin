@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .verify-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+    
+    .verify-card {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+    }
+    
+    .verify-card h2 {
+        color: #667eea;
+        margin-bottom: 20px;
+        font-size: 1.8em;
+    }
+    
+    .success-icon {
+        font-size: 3em;
+        margin-bottom: 20px;
+    }
+    
+    .success-message {
+        background: #e8f5e9;
+        border-left: 4px solid #4caf50;
+        padding: 20px;
+        border-radius: 4px;
+        margin-bottom: 30px;
+        color: #2e7d32;
+    }
+    
+    .success-message h3 {
+        color: #4caf50;
+        margin-top: 0;
+    }
+    
+    .error-message {
+        background: #ffe9e9;
+        border-left: 4px solid #ff6b6b;
+        padding: 20px;
+        border-radius: 4px;
+        margin-bottom: 30px;
+        color: #c92a2a;
+    }
+    
+    .action-btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.05em;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s;
+        margin: 10px 5px;
+    }
+    
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+    }
+</style>
+
+<div class="verify-container">
+    <div class="verify-card">
+        {% if error %}
+        <div class="error-icon" style="font-size: 3em; margin-bottom: 20px;">❌</div>
+        <h2>Verification Failed</h2>
+        <div class="error-message">
+            <h3>Something went wrong</h3>
+            <p>{{ message }}</p>
+        </div>
+        <a href="/login" class="action-btn">Back to Login</a>
+        {% else %}
+        <div class="success-icon">✅</div>
+        <h2>Email Verified!</h2>
+        <div class="success-message">
+            <h3>Success!</h3>
+            <p>{{ message }}</p>
+            <p>Your email has been verified and your account is now active.</p>
+        </div>
+        <a href="/login" class="action-btn">Login Now</a>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

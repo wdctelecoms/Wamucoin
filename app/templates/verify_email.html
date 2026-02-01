@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .verify-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+    
+    .verify-card {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+        text-align: center;
+    }
+    
+    .verify-card h2 {
+        color: #667eea;
+        margin-bottom: 20px;
+        font-size: 1.8em;
+    }
+    
+    .success-icon {
+        font-size: 3em;
+        margin-bottom: 20px;
+    }
+    
+    .verify-message {
+        color: #666;
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 30px;
+    }
+    
+    .email-display {
+        background: #f0f0f0;
+        padding: 15px;
+        border-radius: 6px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: #667eea;
+    }
+    
+    .instructions {
+        background: #e7f3ff;
+        border-left: 4px solid #2196F3;
+        padding: 15px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+    
+    .instructions h3 {
+        color: #2196F3;
+        margin-top: 0;
+    }
+    
+    .instructions ol {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
+    
+    .instructions li {
+        margin-bottom: 8px;
+        color: #333;
+    }
+    
+    .action-btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.05em;
+        font-weight: bold;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s;
+        margin: 10px 5px;
+    }
+    
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+    }
+    
+    .secondary-btn {
+        background: #999;
+    }
+    
+    .secondary-btn:hover {
+        background: #777;
+    }
+</style>
+
+<div class="verify-container">
+    <div class="verify-card">
+        <div class="success-icon">📧</div>
+        <h2>Verify Your Email</h2>
+        
+        <div class="verify-message">
+            We've sent a verification link to:
+        </div>
+        
+        <div class="email-display">{{ email }}</div>
+        
+        <div class="instructions">
+            <h3>What to do next:</h3>
+            <ol>
+                <li>Check your email inbox</li>
+                <li>Click the verification link in the email</li>
+                <li>You'll be able to login once verified</li>
+            </ol>
+        </div>
+        
+        {% if message %}
+        <div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 15px; border-radius: 4px; margin-bottom: 20px; color: #2e7d32; font-weight: bold;">
+            ✅ {{ message }}
+        </div>
+        {% endif %}
+        
+        <div style="margin-top: 30px;">
+            <a href="/login" class="action-btn">Back to Login</a>
+            <a href="/resend_verification" class="action-btn secondary-btn">Resend Email</a>
+        </div>
+        
+        <p style="color: #999; margin-top: 20px; font-size: 0.9em;">
+            Didn't receive the email? Check your spam folder or <a href="/resend_verification" style="color: #667eea; text-decoration: none;">request a new verification link</a>.
+        </p>
+    </div>
+</div>
+
+{% endblock %}

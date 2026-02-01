@@ -1,0 +1,334 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .transaction-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #333;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 6px;
+        font-size: 1em;
+        font-family: Arial, sans-serif;
+        box-sizing: border-box;
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+    
+    .analyze-btn {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .analyze-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+    }
+    
+    .result-container {
+        margin-top: 40px;
+        padding: 20px;
+        border-radius: 10px;
+        background: #f8f9fa;
+        border-left: 5px solid #667eea;
+    }
+    
+    .risk-meter {
+        margin: 20px 0;
+        background: #e9ecef;
+        height: 40px;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .risk-fill {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        transition: width 0.5s ease;
+    }
+    
+    .risk-critical {
+        background: linear-gradient(90deg, #f5576c 0%, #ff6b6b 100%);
+    }
+    
+    .risk-high {
+        background: linear-gradient(90deg, #fa744f 0%, #ff9a56 100%);
+    }
+    
+    .risk-medium {
+        background: linear-gradient(90deg, #ffd89b 0%, #ffe89b 100%);
+        color: #333;
+    }
+    
+    .risk-low {
+        background: linear-gradient(90deg, #84fab0 0%, #8fd3f4 100%);
+        color: #333;
+    }
+    
+    .risk-safe {
+        background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    }
+    
+    .result-section {
+        margin: 25px 0;
+    }
+    
+    .result-section h3 {
+        color: #333;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .warning-box {
+        background: white;
+        border-left: 4px solid #ff6b6b;
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+    }
+    
+    .warning-box.critical {
+        border-left-color: #f5576c;
+        background: #fff5f5;
+    }
+    
+    .warning-box.high {
+        border-left-color: #fa744f;
+        background: #fff8f3;
+    }
+    
+    .scam-type-badge {
+        display: inline-block;
+        background: #667eea;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 20px;
+        margin: 5px 5px 5px 0;
+        font-size: 0.9em;
+        font-weight: bold;
+    }
+    
+    .scam-type-badge.critical {
+        background: #f5576c;
+    }
+    
+    .scam-type-badge.high {
+        background: #fa744f;
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin: 20px 0;
+    }
+    
+    .stat-box {
+        background: white;
+        padding: 15px;
+        border-radius: 6px;
+        border-top: 3px solid #667eea;
+    }
+    
+    .stat-box strong {
+        display: block;
+        color: #667eea;
+        font-size: 1.1em;
+    }
+    
+    .recommendation {
+        background: #e7f3ff;
+        border-left: 4px solid #2196F3;
+        padding: 15px;
+        border-radius: 4px;
+        margin-top: 20px;
+    }
+    
+    .recommendation strong {
+        color: #2196F3;
+    }
+    
+    @media (max-width: 768px) {
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+
+<div class="transaction-container">
+    <h2>🔍 Real-Time Transaction Analyzer</h2>
+    <p>Analyze transactions for fraud risk before you send money</p>
+    
+    <form method="POST" class="analyze-form">
+        <div class="form-group">
+            <label for="recipient">👤 Recipient Name/Account</label>
+            <input type="text" id="recipient" name="recipient" placeholder="e.g., John Smith, Company Name" required>
+            <small>Who are you sending money to?</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="amount">💰 Transaction Amount</label>
+            <input type="number" id="amount" name="amount" placeholder="0.00" step="0.01" min="0" required>
+            <small>Amount in your local currency</small>
+        </div>
+        
+        <div class="form-group">
+            <label for="description">📝 Transaction Description/Message</label>
+            <textarea id="description" name="description" placeholder="e.g., Investment opportunity, gift, loan repayment, etc." rows="6" required></textarea>
+            <small>Include any details about why you're sending this money</small>
+        </div>
+        
+        <button type="submit" class="analyze-btn">⚡ Analyze Transaction for Risk</button>
+    </form>
+    
+    {% if result %}
+    <div class="result-container">
+        <h2>📊 Analysis Results</h2>
+        
+        <div class="result-section">
+            <h3>Risk Score: {{ result.risk_score }}/100</h3>
+            <div class="risk-meter">
+                <div class="risk-fill risk-{{ result.risk_level.split()[0].lower() }}" style="width: {{ result.risk_score }}%">
+                    <span>{{ result.risk_level }}</span>
+                </div>
+            </div>
+        </div>
+        
+        {% if result.scam_types %}
+        <div class="result-section">
+            <h3>🚨 Detected Scam Types</h3>
+            <div>
+                {% for scam_type in result.scam_types %}
+                <span class="scam-type-badge {% if result.risk_score >= 80 %}critical{% elif result.risk_score >= 60 %}high{% endif %}">
+                    {{ scam_type }}
+                </span>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <div class="result-section">
+            <h3>⚠️ Warnings & Red Flags</h3>
+            {% if result.warnings %}
+                {% for warning in result.warnings %}
+                <div class="warning-box {% if result.risk_score >= 80 %}critical{% elif result.risk_score >= 60 %}high{% endif %}">
+                    {{ warning }}
+                </div>
+                {% endfor %}
+            {% else %}
+                <p style="color: #28a745; font-weight: bold;">✅ No major red flags detected!</p>
+            {% endif %}
+        </div>
+        
+        <!-- Recommendation Box -->
+        <div class="recommendation">
+            <strong>💡 Our Recommendation:</strong>
+            {% if result.risk_score >= 80 %}
+            <p>🚨 <strong>DO NOT SEND THIS MONEY!</strong> This transaction shows multiple critical fraud indicators. The risk level is CRITICAL. Contact the official organization directly using verified contact information if you believe this is legitimate.</p>
+            {% elif result.risk_score >= 60 %}
+            <p>⚠️ <strong>PROCEED WITH EXTREME CAUTION!</strong> This transaction has HIGH risk indicators. Verify the recipient's identity through independent means before proceeding. Ask yourself: "Do I really know who I'm sending money to?"</p>
+            {% elif result.risk_score >= 40 %}
+            <p>🟡 <strong>BE CAUTIOUS!</strong> This transaction has MEDIUM risk indicators. Double-check the recipient's identity and the legitimacy of the request before sending money.</p>
+            {% elif result.risk_score >= 20 %}
+            <p>🟡 <strong>VERIFY CAREFULLY!</strong> This transaction has LOW risk indicators, but still verify the recipient through trusted channels before sending.</p>
+            {% else %}
+            <p>✅ <strong>LOW RISK!</strong> This transaction appears to be safe based on the information provided. However, always use basic caution and verify recipient details before sending money.</p>
+            {% endif %}
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-box">
+                <strong>Recipient Safety Score</strong>
+                <p>
+                {% if result.risk_score < 30 %}
+                    ✅ Appears Safe
+                {% elif result.risk_score < 60 %}
+                    🟡 Verify Recipient
+                {% else %}
+                    🚨 Highly Suspicious
+                {% endif %}
+                </p>
+            </div>
+            
+            <div class="stat-box">
+                <strong>Amount Assessment</strong>
+                <p>
+                {% if result.risk_score < 30 %}
+                    ✅ Reasonable Amount
+                {% elif result.risk_score < 60 %}
+                    🟡 Consider Amount
+                {% else %}
+                    🚨 High Risk Amount
+                {% endif %}
+                </p>
+            </div>
+        </div>
+        
+        <div style="margin-top: 30px; padding: 20px; background: #f0f0f0; border-radius: 6px;">
+            <h4>📚 Common Fraud Prevention Tips:</h4>
+            <ul style="line-height: 1.8;">
+                <li>Never send money to unknown or unverified recipients</li>
+                <li>Verify requests through official contact channels, not via links provided in messages</li>
+                <li>Be suspicious of urgent requests, guaranteed returns, or too-good-to-be-true offers</li>
+                <li>Never share passwords, seed phrases, or private keys with anyone</li>
+                <li>For investment opportunities, always verify with official financial regulators</li>
+                <li>Use secure payment methods that offer buyer protection</li>
+                <li>Trust your instincts - if something feels wrong, it probably is</li>
+            </ul>
+        </div>
+        
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="/transaction_history" class="analyze-btn" style="display: inline-block; width: auto; padding: 12px 30px;">
+                📋 View Transaction History
+            </a>
+        </div>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    // Real-time validation
+    document.querySelector('.analyze-form').addEventListener('submit', function(e) {
+        const amount = parseFloat(document.getElementById('amount').value);
+        if (amount < 0) {
+            alert('Please enter a valid amount');
+            e.preventDefault();
+        }
+    });
+</script>
+
+{% endblock %}

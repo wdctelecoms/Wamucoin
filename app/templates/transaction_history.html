@@ -1,0 +1,412 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .history-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .stats-summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .summary-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    .summary-card h4 {
+        margin: 0 0 10px 0;
+        font-size: 0.9em;
+        opacity: 0.9;
+    }
+    
+    .summary-card .number {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin: 10px 0;
+    }
+    
+    .transactions-table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .transactions-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    .transactions-table th {
+        padding: 15px;
+        text-align: left;
+        font-weight: bold;
+    }
+    
+    .transactions-table td {
+        padding: 15px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .transactions-table tbody tr:hover {
+        background: #f8f9fa;
+    }
+    
+    .risk-badge {
+        display: inline-block;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 0.85em;
+    }
+    
+    .risk-critical {
+        background: #f5576c;
+        color: white;
+    }
+    
+    .risk-high {
+        background: #fa744f;
+        color: white;
+    }
+    
+    .risk-medium {
+        background: #ffd89b;
+        color: #333;
+    }
+    
+    .risk-low {
+        background: #84fab0;
+        color: #333;
+    }
+    
+    .risk-safe {
+        background: #4facfe;
+        color: white;
+    }
+    
+    .amount-cell {
+        font-weight: bold;
+        color: #667eea;
+    }
+    
+    .score-cell {
+        font-size: 1.1em;
+        font-weight: bold;
+    }
+    
+    .expand-btn {
+        background: none;
+        border: none;
+        color: #667eea;
+        cursor: pointer;
+        font-size: 1.2em;
+        padding: 5px 10px;
+    }
+    
+    .expand-btn:hover {
+        color: #764ba2;
+    }
+    
+    .details-row {
+        background: #f8f9fa;
+        display: none;
+    }
+    
+    .details-row.show {
+        display: table-row;
+    }
+    
+    .details-content {
+        padding: 20px;
+    }
+    
+    .detail-item {
+        margin-bottom: 15px;
+    }
+    
+    .detail-item strong {
+        color: #667eea;
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .warning-item {
+        background: #fff5f5;
+        border-left: 3px solid #f5576c;
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 3px;
+    }
+    
+    .scam-type-tag {
+        display: inline-block;
+        background: #f5576c;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 0.8em;
+        margin: 3px 3px 3px 0;
+    }
+    
+    .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+    }
+    
+    .empty-state h3 {
+        color: #999;
+        margin-bottom: 10px;
+    }
+    
+    .empty-state p {
+        color: #bbb;
+        margin-bottom: 20px;
+    }
+    
+    .analyze-link {
+        display: inline-block;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+    
+    .analyze-link:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(102, 126, 234, 0.3);
+    }
+    
+    .filter-controls {
+        margin-bottom: 20px;
+        display: flex;
+        gap: 10px;
+    }
+    
+    .filter-btn {
+        padding: 10px 15px;
+        border: 2px solid #667eea;
+        background: white;
+        color: #667eea;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+    
+    .filter-btn.active {
+        background: #667eea;
+        color: white;
+    }
+    
+    .filter-btn:hover {
+        background: #667eea;
+        color: white;
+    }
+    
+    @media (max-width: 768px) {
+        .transactions-table {
+            font-size: 0.9em;
+        }
+        
+        .transactions-table th,
+        .transactions-table td {
+            padding: 10px;
+        }
+        
+        .stats-summary {
+            grid-template-columns: 1fr 1fr;
+        }
+        
+        .filter-controls {
+            flex-wrap: wrap;
+        }
+    }
+</style>
+
+<div class="history-container">
+    <h2>📋 Transaction Analysis History</h2>
+    
+    {% if transactions %}
+    <div class="stats-summary">
+        <div class="summary-card">
+            <h4>Total Transactions</h4>
+            <div class="number">{{ transactions|length }}</div>
+        </div>
+        
+        <div class="summary-card" style="background: linear-gradient(135deg, #f5576c 0%, #ff6b6b 100%);">
+            <h4>High Risk (Score ≥60)</h4>
+            <div class="number">
+                {% set high_risk = transactions|selectattr('risk_score', 'ge', 60)|list|length %}
+                {{ high_risk }}
+            </div>
+        </div>
+        
+        <div class="summary-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+            <h4>Safe Transactions (Score <40)</h4>
+            <div class="number">
+                {% set safe = transactions|selectattr('risk_score', 'lt', 40)|list|length %}
+                {{ safe }}
+            </div>
+        </div>
+    </div>
+    
+    <div class="filter-controls">
+        <button class="filter-btn active" onclick="filterTransactions('all')">All Transactions</button>
+        <button class="filter-btn" onclick="filterTransactions('critical')">🚨 Critical</button>
+        <button class="filter-btn" onclick="filterTransactions('high')">⚠️ High Risk</button>
+        <button class="filter-btn" onclick="filterTransactions('safe')">✅ Safe</button>
+    </div>
+    
+    <table class="transactions-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Date</th>
+                <th>Recipient</th>
+                <th>Amount</th>
+                <th>Risk Score</th>
+                <th>Risk Level</th>
+                <th>Scam Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trans in transactions %}
+            <tr class="transaction-row" data-risk-score="{{ trans.risk_score }}">
+                <td>
+                    <button class="expand-btn" onclick="toggleDetails(this)">▼</button>
+                </td>
+                <td>{{ trans.timestamp[:10] if trans.timestamp else 'N/A' }}</td>
+                <td>{{ trans.recipient }}</td>
+                <td class="amount-cell">${{ "%.2f"|format(trans.amount) }}</td>
+                <td class="score-cell">{{ trans.risk_score }}/100</td>
+                <td>
+                    {% set risk_class = 'safe' if trans.risk_score < 20 else 'low' if trans.risk_score < 40 else 'medium' if trans.risk_score < 60 else 'high' if trans.risk_score < 80 else 'critical' %}
+                    <span class="risk-badge risk-{{ risk_class }}">
+                        {% if trans.risk_score >= 80 %}
+                        CRITICAL 🚨
+                        {% elif trans.risk_score >= 60 %}
+                        HIGH ⚠️
+                        {% elif trans.risk_score >= 40 %}
+                        MEDIUM 🟡
+                        {% elif trans.risk_score >= 20 %}
+                        LOW 🟡
+                        {% else %}
+                        SAFE ✅
+                        {% endif %}
+                    </span>
+                </td>
+                <td>
+                    {% if trans.scam_type %}
+                        {% set scam_types = trans.scam_type.split(',') %}
+                        {% for scam in scam_types[:1] %}
+                            <span class="scam-type-tag">{{ scam.strip() }}</span>
+                            {% if scam_types|length > 1 %}
+                            <span class="scam-type-tag">+{{ scam_types|length - 1 }} more</span>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                    <span style="color: #999;">None</span>
+                    {% endif %}
+                </td>
+            </tr>
+            
+            <tr class="details-row">
+                <td colspan="7">
+                    <div class="details-content">
+                        <div class="detail-item">
+                            <strong>Description:</strong>
+                            {{ trans.description }}
+                        </div>
+                        
+                        {% if trans.scam_type %}
+                        <div class="detail-item">
+                            <strong>Detected Scam Types:</strong>
+                            <div>
+                                {% set scam_types = trans.scam_type.split(',') %}
+                                {% for scam in scam_types %}
+                                <span class="scam-type-tag">{{ scam.strip() }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                        
+                        {% if trans.warnings %}
+                        <div class="detail-item">
+                            <strong>⚠️ Warnings:</strong>
+                            <div>
+                                {% set warnings = trans.warnings %}
+                                {% for warning in warnings %}
+                                <div class="warning-item">{{ warning }}</div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {% else %}
+    <div class="empty-state">
+        <h3>📭 No Transactions Analyzed Yet</h3>
+        <p>You haven't analyzed any transactions yet. Start by analyzing a transaction to check for fraud risk.</p>
+        <a href="/analyze_transaction" class="analyze-link">Analyze Your First Transaction</a>
+    </div>
+    {% endif %}
+</div>
+
+<script>
+    function toggleDetails(btn) {
+        const row = btn.closest('tr');
+        const detailsRow = row.nextElementSibling;
+        detailsRow.classList.toggle('show');
+        btn.textContent = detailsRow.classList.contains('show') ? '▲' : '▼';
+    }
+    
+    function filterTransactions(type) {
+        // Update button states
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Filter rows
+        document.querySelectorAll('.transaction-row').forEach(row => {
+            const score = parseInt(row.dataset.riskScore);
+            let show = false;
+            
+            if (type === 'all') {
+                show = true;
+            } else if (type === 'critical') {
+                show = score >= 80;
+            } else if (type === 'high') {
+                show = score >= 60 && score < 80;
+            } else if (type === 'safe') {
+                show = score < 40;
+            }
+            
+            row.style.display = show ? '' : 'none';
+            row.nextElementSibling.style.display = 'none';
+            row.nextElementSibling.classList.remove('show');
+            row.querySelector('.expand-btn').textContent = '▼';
+        });
+    }
+</script>
+
+{% endblock %}

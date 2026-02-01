@@ -2,6 +2,19 @@
 {% block content %}
 <div class="intro-container">
     <div class="intro-hero">
+        <div class="hero-graphic">
+            <svg class="hero-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#16a34a;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="100" cy="100" r="95" stroke="url(#heroGradient)" stroke-width="3" fill="none"/>
+                <path d="M 70 100 L 90 120 L 130 75" stroke="url(#heroGradient)" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="100" cy="100" r="85" stroke="rgba(34,197,94,0.1)" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
         <h1>About FinShield AI</h1>
         <p class="intro-subtitle">Advanced AI-Powered Financial Fraud Detection</p>
     </div>
@@ -9,19 +22,37 @@
     <div class="intro-section">
         <h2>The Problem</h2>
         <div class="intro-content">
-            <p>Financial fraud and scams are growing at an alarming rate. From cryptocurrency schemes to fake investment opportunities, millions of people lose billions annually to fraud. Traditional methods of fraud detection are often too slow, reactive, and require extensive manual review.</p>
-            <div class="stat-box">
-                <div class="stat">
-                    <div class="stat-number">$14.1B</div>
-                    <div class="stat-label">Lost to fraud annually (US)</div>
+            <div class="section-layout">
+                <div class="section-image">
+                    <svg class="problem-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="warningGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ef4444;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#dc2626;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="100" cy="90" r="35" fill="url(#warningGradient)"/>
+                        <text x="100" y="105" font-size="40" font-weight="bold" fill="white" text-anchor="middle">!</text>
+                        <line x1="100" y1="135" x2="100" y2="160" stroke="url(#warningGradient)" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="100" cy="170" r="5" fill="url(#warningGradient)"/>
+                    </svg>
                 </div>
-                <div class="stat">
-                    <div class="stat-number">5M+</div>
-                    <div class="stat-label">Fraud reports yearly</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-number">30%</div>
-                    <div class="stat-label">Increase in crypto scams</div>
+                <div class="section-text">
+                    <p>Financial fraud and scams are growing at an alarming rate. From cryptocurrency schemes to fake investment opportunities, millions of people lose billions annually to fraud. Traditional methods of fraud detection are often too slow, reactive, and require extensive manual review.</p>
+                    <div class="stat-box">
+                        <div class="stat">
+                            <div class="stat-number">$14.1B</div>
+                            <div class="stat-label">Lost to fraud annually (US)</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">5M+</div>
+                            <div class="stat-label">Fraud reports yearly</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">30%</div>
+                            <div class="stat-label">Increase in crypto scams</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -30,26 +61,95 @@
     <div class="intro-section">
         <h2>Our Solution</h2>
         <div class="intro-content">
-            <p><strong>FinShield AI</strong> is an intelligent detection system that uses advanced artificial intelligence to identify and analyze financial fraud patterns in real-time. Our system learns from thousands of known scam patterns and uses machine learning to detect new, emerging threats.</p>
+            <div class="section-layout">
+                <div class="section-text">
+                    <p><strong>FinShield AI</strong> is an intelligent detection system that uses advanced artificial intelligence to identify and analyze financial fraud patterns in real-time. Our system learns from thousands of known scam patterns and uses machine learning to detect new, emerging threats.</p>
+                </div>
+                <div class="section-image">
+                    <svg class="solution-main-icon" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="solutionGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="40" y="40" width="120" height="120" rx="15" fill="url(#solutionGradient)" opacity="0.1" stroke="url(#solutionGradient)" stroke-width="2"/>
+                        <circle cx="100" cy="85" r="20" fill="url(#solutionGradient)"/>
+                        <circle cx="70" cy="130" r="15" fill="url(#solutionGradient)" opacity="0.6"/>
+                        <circle cx="130" cy="130" r="15" fill="url(#solutionGradient)" opacity="0.6"/>
+                        <line x1="85" y1="100" x2="70" y2="120" stroke="url(#solutionGradient)" stroke-width="2"/>
+                        <line x1="115" y1="100" x2="130" y2="120" stroke="url(#solutionGradient)" stroke-width="2"/>
+                    </svg>
+                </div>
+            </div>
             
             <div class="solution-features">
                 <div class="solution-item">
-                    <div class="solution-icon">🤖</div>
+                    <svg class="solution-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="mlGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="8" y="10" width="14" height="14" rx="2" fill="url(#mlGradient)"/>
+                        <rect x="24" y="10" width="14" height="14" rx="2" fill="url(#mlGradient)"/>
+                        <rect x="40" y="10" width="14" height="14" rx="2" fill="url(#mlGradient)"/>
+                        <circle cx="15" cy="35" r="3" fill="url(#mlGradient)"/>
+                        <circle cx="31" cy="35" r="3" fill="url(#mlGradient)"/>
+                        <circle cx="47" cy="35" r="3" fill="url(#mlGradient)"/>
+                        <line x1="15" y1="24" x2="15" y2="32" stroke="url(#mlGradient)" stroke-width="1.5"/>
+                        <line x1="31" y1="24" x2="31" y2="32" stroke="url(#mlGradient)" stroke-width="1.5"/>
+                        <line x1="47" y1="24" x2="47" y2="32" stroke="url(#mlGradient)" stroke-width="1.5"/>
+                        <path d="M 10 50 Q 30 40 50 50" stroke="url(#mlGradient)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </svg>
                     <h3>Machine Learning Engine</h3>
                     <p>Continuously learns from new fraud patterns to improve detection accuracy</p>
                 </div>
                 <div class="solution-item">
-                    <div class="solution-icon">⚡</div>
+                    <svg class="solution-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="fastGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <polygon points="30,10 50,20 50,40 30,50 10,40 10,20" fill="url(#fastGradient)" opacity="0.1" stroke="url(#fastGradient)" stroke-width="2"/>
+                        <polygon points="30,20 42,27 42,37 30,44 18,37 18,27" fill="url(#fastGradient)"/>
+                    </svg>
                     <h3>Instant Analysis</h3>
                     <p>Get results in seconds, not hours or days</p>
                 </div>
                 <div class="solution-item">
-                    <div class="solution-icon">🔍</div>
+                    <svg class="solution-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="searchGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="25" cy="25" r="15" fill="none" stroke="url(#searchGradient)" stroke-width="2"/>
+                        <line x1="38" y1="38" x2="48" y2="48" stroke="url(#searchGradient)" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="25" cy="25" r="8" fill="url(#searchGradient)" opacity="0.2"/>
+                    </svg>
                     <h3>Deep Pattern Recognition</h3>
                     <p>Identifies subtle patterns that humans might miss</p>
                 </div>
                 <div class="solution-item">
-                    <div class="solution-icon">👥</div>
+                    <svg class="solution-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="communityGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#be185d;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="30" cy="18" r="8" fill="url(#communityGradient)"/>
+                        <circle cx="15" cy="38" r="7" fill="url(#communityGradient)"/>
+                        <circle cx="45" cy="38" r="7" fill="url(#communityGradient)"/>
+                        <line x1="30" y1="25" x2="18" y2="34" stroke="url(#communityGradient)" stroke-width="1.5"/>
+                        <line x1="30" y1="25" x2="42" y2="34" stroke="url(#communityGradient)" stroke-width="1.5"/>
+                        <line x1="15" y1="45" x2="45" y2="45" stroke="url(#communityGradient)" stroke-width="1.5"/>
+                    </svg>
                     <h3>Community Intelligence</h3>
                     <p>Collective knowledge shared across the platform to protect everyone</p>
                 </div>
@@ -62,7 +162,17 @@
         <div class="intro-content">
             <div class="features-list">
                 <div class="feature-item">
-                    <div class="feature-number">01</div>
+                    <svg class="feature-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="feat1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#22c55e;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#16a34a;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="10" y="10" width="40" height="40" rx="5" fill="url(#feat1)" opacity="0.1" stroke="url(#feat1)" stroke-width="2"/>
+                        <circle cx="30" cy="30" r="8" fill="url(#feat1)"/>
+                        <path d="M 30 16 L 30 44 M 16 30 L 44 30" stroke="url(#feat1)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
                     <div class="feature-details">
                         <h3>Real-Time Text Analysis</h3>
                         <p>Paste any message, email, or proposal into our system for instant fraud risk assessment. Our AI scans for common scam indicators, suspicious language, and known fraud patterns.</p>
@@ -70,7 +180,17 @@
                 </div>
 
                 <div class="feature-item">
-                    <div class="feature-number">02</div>
+                    <svg class="feature-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="feat2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="30" cy="30" r="20" fill="none" stroke="url(#feat2)" stroke-width="2"/>
+                        <circle cx="30" cy="30" r="14" fill="url(#feat2)" opacity="0.1" stroke="url(#feat2)" stroke-width="2"/>
+                        <path d="M 30 20 A 10 10 0 0 1 40 30" stroke="url(#feat2)" stroke-width="3" stroke-linecap="round" fill="none"/>
+                    </svg>
                     <div class="feature-details">
                         <h3>Risk Scoring</h3>
                         <p>Receive detailed risk assessments ranging from Low Risk to High Risk, helping you make informed decisions about suspicious communications.</p>
@@ -78,7 +198,17 @@
                 </div>
 
                 <div class="feature-item">
-                    <div class="feature-number">03</div>
+                    <svg class="feature-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="feat3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M 15 50 L 25 25 L 30 35 L 45 15" fill="none" stroke="url(#feat3)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <rect x="10" y="10" width="40" height="42" rx="3" fill="none" stroke="url(#feat3)" stroke-width="2"/>
+                        <line x1="15" y1="18" x2="45" y2="18" stroke="url(#feat3)" stroke-width="1.5"/>
+                    </svg>
                     <div class="feature-details">
                         <h3>Report & Share</h3>
                         <p>Report suspicious content to contribute to our growing database of known scams. Help protect your community by sharing threat intelligence.</p>
@@ -86,7 +216,18 @@
                 </div>
 
                 <div class="feature-item">
-                    <div class="feature-number">04</div>
+                    <svg class="feature-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="feat4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#6d28d9;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="30" cy="30" r="20" fill="url(#feat4)" opacity="0.1" stroke="url(#feat4)" stroke-width="2"/>
+                        <path d="M 30 12 L 35 20 L 30 28 L 25 20 Z" fill="url(#feat4)"/>
+                        <line x1="30" y1="30" x2="30" y2="45" stroke="url(#feat4)" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="30" cy="48" r="2" fill="url(#feat4)"/>
+                    </svg>
                     <div class="feature-details">
                         <h3>Active Alerts Feed</h3>
                         <p>Stay informed with live updates on emerging scam threats and fraud patterns detected by our community.</p>
@@ -94,7 +235,16 @@
                 </div>
 
                 <div class="feature-item">
-                    <div class="feature-number">05</div>
+                    <svg class="feature-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="feat5" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#ec4899;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#be185d;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="15" y="20" width="30" height="28" rx="3" fill="url(#feat5)" opacity="0.1" stroke="url(#feat5)" stroke-width="2"/>
+                        <path d="M 22 28 L 28 34 L 38 24" stroke="url(#feat5)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
                     <div class="feature-details">
                         <h3>Secure & Private</h3>
                         <p>Your data is protected with industry-standard encryption. We never share your personal information with third parties.</p>
@@ -102,7 +252,17 @@
                 </div>
 
                 <div class="feature-item">
-                    <div class="feature-number">06</div>
+                    <svg class="feature-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="feat6" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <rect x="12" y="12" width="36" height="36" rx="4" fill="url(#feat6)" opacity="0.1" stroke="url(#feat6)" stroke-width="2"/>
+                        <circle cx="30" cy="24" r="4" fill="url(#feat6)"/>
+                        <path d="M 22 32 L 26 38 L 38 28" stroke="url(#feat6)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
                     <div class="feature-details">
                         <h3>Educational Resources</h3>
                         <p>Learn how to identify scams, protect yourself, and recognize common fraud tactics before they target you.</p>

@@ -378,6 +378,18 @@ button:active {
     border: 1px solid rgba(34, 197, 94, 0.2);
 }
 
+.hero-graphic {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.hero-icon {
+    width: 120px;
+    height: 120px;
+    filter: drop-shadow(0 4px 15px rgba(34, 197, 94, 0.3));
+}
+
 .intro-hero h1 {
     font-size: 48px;
     color: #22c55e;
@@ -411,6 +423,34 @@ button:active {
 .intro-content p {
     margin-bottom: 20px;
     font-size: 16px;
+}
+
+/* Section Layout with Image and Text */
+.section-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.section-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.problem-icon,
+.solution-main-icon {
+    width: 200px;
+    height: 200px;
+    filter: drop-shadow(0 8px 20px rgba(34, 197, 94, 0.2));
+}
+
+.section-text {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .stat-box {
@@ -453,11 +493,19 @@ button:active {
     border-radius: 10px;
     border: 1px solid rgba(34, 197, 94, 0.15);
     text-align: center;
+    transition: all 0.3s ease;
+}
+
+.solution-item:hover {
+    border-color: rgba(34, 197, 94, 0.4);
+    background: rgba(30, 41, 59, 0.8);
+    transform: translateY(-5px);
 }
 
 .solution-icon {
-    font-size: 32px;
-    margin-bottom: 10px;
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
 }
 
 .solution-item h3 {
@@ -484,6 +532,19 @@ button:active {
     background: rgba(30, 41, 59, 0.5);
     border-radius: 10px;
     border-left: 4px solid #22c55e;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    background: rgba(30, 41, 59, 0.7);
+    border-left-color: #16a34a;
+}
+
+.feature-icon {
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+    flex-shrink: 0;
 }
 
 .feature-number {
@@ -497,11 +558,13 @@ button:active {
 .feature-details h3 {
     color: #60a5fa;
     margin-bottom: 8px;
+    text-align: left;
 }
 
 .feature-details p {
     font-size: 14px;
     color: #b1bdc4;
+    text-align: left;
 }
 
 .workflow {
@@ -664,6 +727,26 @@ button:active {
         margin-left: 0;
     }
 
+    .section-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .section-image {
+        order: -1;
+    }
+
+    .hero-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .problem-icon,
+    .solution-main-icon {
+        width: 150px;
+        height: 150px;
+    }
+
     .intro-hero h1 {
         font-size: 32px;
     }
@@ -686,6 +769,11 @@ button:active {
 
     .feature-item {
         flex-direction: column;
+        text-align: center;
+    }
+
+    .feature-details h3,
+    .feature-details p {
         text-align: center;
     }
 
