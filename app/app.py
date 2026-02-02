@@ -92,9 +92,9 @@ def init_db():
     conn.commit()
     conn.close()
 
-# Ensure initialization runs before the first request in WSGI environments
-# (avoid running DB creation at import time in serverless environments)
-app.before_first_request(init_db)
+# Initialize database using app context (compatible with Flask 3.x)
+with app.app_context():
+    init_db()
 
 # Advanced AI Fraud Detection System
 class FraudDetectionAI:
